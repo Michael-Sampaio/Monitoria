@@ -11,29 +11,29 @@ import br.org.serratec.monitoria.repository.ClienteRepository;
 
 @Service
 public class ClienteService {
-    
+
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public List<Cliente> obter(){
+    public List<Cliente> obter() {
         return clienteRepository.findAll();
     }
 
-    public Optional<Cliente> obterPorId(Long id){
+    public Optional<Cliente> obterPorId(Long id) {
         return clienteRepository.findById(id);
     }
 
-    public Cliente adicionar(Cliente cliente){
+    public Cliente adicionar(Cliente cliente) {
         cliente.setId(null);
         return clienteRepository.save(cliente);
     }
 
-    public Cliente atualizar(Long id, Cliente cliente){
+    public Cliente atualizar(Long id, Cliente cliente) {
         cliente.setId(id);
         return clienteRepository.save(cliente);
     }
 
-    public void deletar(Long id){
+    public void deletar(Long id) {
         clienteRepository.deleteById(id);
     }
 

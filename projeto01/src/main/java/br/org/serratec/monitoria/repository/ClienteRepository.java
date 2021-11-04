@@ -7,5 +7,5 @@ import br.org.serratec.monitoria.model.Cliente;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
-    
+
 }

@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +28,7 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @GetMapping
-    private ResponseEntity<List<Cliente>> obterCliente(){
+    private ResponseEntity<List<Cliente>> obterCliente() {
         List<Cliente> clientes = clienteService.obter();
         return new ResponseEntity<>(clientes, HttpStatus.OK);
     }
@@ -39,15 +40,21 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> adicionar(@Valid @RequestBody Cliente cliente){
+    public ResponseEntity<Cliente> adicionar(@Valid @RequestBody Cliente cliente) {
         Cliente clienteAdicionado = clienteService.adicionar(cliente);
         return new ResponseEntity<>(clienteAdicionado, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long id, @RequestBody Cliente cliente){
+    public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long id, @RequestBody Cliente cliente) {
         Cliente clienteAlterado = clienteService.adicionar(cliente);
         return new ResponseEntity<>(clienteAlterado, HttpStatus.OK);
     }
-    
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        clienteService.deletar(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }
